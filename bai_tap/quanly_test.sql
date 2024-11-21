@@ -111,3 +111,25 @@ primary key (id_hop_dong_chi_tiet),
 foreign key (id_hop_dong) references hop_dong(id_hop_dong),
 foreign key(id_dich_vu_di_kem) references dich_vu_di_kem(id_dich_vu_di_kem)
 );
+
+select * from nhan_vien where (ho_ten like '%H' or ho_ten like '%T' or ho_ten like '%K') and length(ho_ten) <= 15;
+
+select * from khach_hang where timestampdiff(year,ngay_sinh,curdate()) between 18 and 50
+	and (dia_chi = 'Da Nang' or dia_chi = 'Quang Tri');
+
+select k.id_khach_hang, k.ho_ten, count(hd.id_hop_dong) as bookings_count
+from khach_hang k
+join loai_khach lk on k.id_loai_khach = lk.id_loai_khach
+left join hop_dong hd on k.id_khach_hang = hd.id_khach_hang
+where lk.ten_loaikhach = 'Diamond'
+group by k.id_khach_hang
+order by bookings_count asc;
+
+select k.id_khach_hang, k.ho_ten, lk.ten_loaikhach, hd.id_hop_dong, d.ten_dich_vu, hd.ngay_lam_hop_dong, hd.ngay_ket_thuc,(d.chi_phi_thue + hdc.soluong * dvk.gia) as tong_tien
+from khach_hang k
+join loai_khach lk on k.id_loai_khach = lk.id_loai_khach
+left join hop_dong hd on k.id_khach_hang = hd.id_khach_hang
+left join dich_vu d on hd.id_dich_vu = d.id_dich_vu
+left join hop_dong_chi_tiet hdc on hd.id_hop_dong = hdc.id_hop_dong
+left join dich_vu_di_kem dvk on hdc.id_dich_vu_di_kem = dvk.id_dich_vu_di_kem
+order by k.id_khach_hang;
