@@ -7,7 +7,7 @@ primary key (customer_id)
 );
 create table orders(
 order_id int primary key,
-order_date date,
+order_date datetime,
 order_total_price double ,
 customer_id int,
 foreign key (customer_id) references customers(customer_id)
