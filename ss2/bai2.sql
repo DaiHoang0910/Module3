@@ -1,8 +1,9 @@
 use quan_ly_ban_hang;
 create table customers(
-customer_id int primary key,
+customer_id int auto_increment,
 customer_name varchar(100),
-customer_age varchar(100)
+customer_age varchar(100),
+primary key (customer_id)
 );
 create table orders(
 order_id int primary key,
