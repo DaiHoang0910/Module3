@@ -291,3 +291,113 @@ group by
     hd.tien_dat_coc
 order by
 	hd.id_hop_dong;
+    
+-- 11.Hiển thị thông tin các Dịch vụ đi kèm đã được sử dụng bởi những Khách hàng có TenLoaiKhachHang là “Diamond” 
+-- và có địa chỉ là “Vinh” hoặc “Quảng Ngãi”.
+select distinct dvdk.id_dich_vu_di_kem,
+				dvdk.ten_dich_vu_di_kem,
+                dvdk.gia,
+                dvdk.don_vi
+from khach_hang k
+join loai_khach lk on k.id_loai_khach = lk.id_loai_khach
+join hop_dong hd on k.id_khach_hang = hd.id_khach_hang
+join hop_dong_chi_tiet hdc on hd.id_hop_dong = hdc.id_hop_dong
+join dich_vu_di_kem dvdk on hdc.id_dich_vu_di_kem = dvdk.id_dich_vu_di_kem
+where lk.ten_loaikhach = 'Diamond' and (k.dia_chi = 'Vinh' or k.dia_chi = 'Quang Ngai');
+
+-- 12.Hiển thị thông tin IDHopDong, TenNhanVien, TenKhachHang, SoDienThoaiKhachHang, TenDichVu, SoLuongDichVuDikem (được tính dựa trên tổng Hợp đồng chi tiết), 
+-- TienDatCoc của tất cả các dịch vụ đã từng được khách hàng đặt vào 3 tháng cuối năm 2019 nhưng chưa từng được khách hàng đặt vào 6 tháng đầu năm 2019.
+-- Lấy danh sách các dịch vụ đã đặt trong 3 tháng cuối năm 2019
+create temporary table Dicu_vu_cuoi_nam as
+    select 
+        hd.id_hop_dong,
+        nv.ho_ten as ten_nhan_vien,
+        kh.ho_ten as ten_khach_hang,
+        kh.sdt as so_dien_thoai_khach_hang,
+        dv.ten_dich_vu_di_kem as ten_dich_vu,
+        SUM(hdc.soluong) as so_luong_dich_vu_di_kem,
+        hd.tien_dat_coc,
+        hdc.id_dich_vu_di_kem
+    from hop_dong hd
+    join hop_dong_chi_tiet hdc on hd.id_hop_dong = hdc.id_hop_dong
+    join dich_vu_di_kem dv on hdc.id_dich_vu_di_kem = dv.id_dich_vu_di_kem
+    join khach_hang kh on hd.id_khach_hang = kh.id_khach_hang
+    join nhan_vien nv on hd.id_nhan_vien = nv.id_nhan_vien
+    where hd.ngay_lam_hop_dong between '2019-10-01' and '2019-12-31'
+    group by 
+		hd.id_hop_dong, 
+        nv.ho_ten, 
+        kh.ho_ten, 
+        kh.sdt, 
+        dv.ten_dich_vu_di_kem, 
+        hd.tien_dat_coc, 
+        hdc.id_dich_vu_di_kem;
+
+create temporary table Dich_vu_dau_nam as
+    select distinct hdc.id_dich_vu_di_kem
+    from hop_dong hd
+    join hop_dong_chi_tiet hdc on hd.id_hop_dong = hdc.id_hop_dong
+    where hd.ngay_lam_hop_dong between '2019-01-01' and '2019-06-30';
+
+SELECT 
+    dvcn.id_hop_dong, 
+    dvcn.ten_nhan_vien, 
+    dvcn.ten_khach_hang, 
+    dvcn.so_dien_thoai_khach_hang, 
+    dvcn.ten_dich_vu, 
+    dvcn.so_luong_dich_vu_di_kem, 
+    dvcn.tien_dat_coc
+from Dich_vu_cuoi_nam dvcn
+where dvcn.id_dich_vu_di_kem not in (
+        select id_dich_vu_di_kem
+        from Dich_vu_dau_nam
+    );
+
+
+-- 13.Hiển thị thông tin các Dịch vụ đi kèm được sử dụng nhiều nhất bởi các Khách hàng đã đặt phòng. (Lưu ý là có thể có nhiều dịch vụ có số lần sử dụng nhiều như nhau).
+with service_usage as (
+    select dv.id_dich_vu_di_kem, 
+           dv.ten_dich_vu_di_kem, 
+           SUM(hdc.soluong) as so_lan_su_dung
+    from hop_dong_chi_tiet hdc
+    join dich_vu_di_kem dv on hdc.id_dich_vu_di_kem = dv.id_dich_vu_di_kem
+    join hop_dong hd on hdc.id_hop_dong = hd.id_hop_dong
+    where hd.id_khach_hang is not null
+    group by dv.id_dich_vu_di_kem, dv.ten_dich_vu_di_kem
+),
+max_usage as (
+    select MAX(so_lan_su_dung) as max_su_dung
+    from ServiceUsage
+)
+select su.id_dich_vu_di_kem, 
+       su.ten_dich_vu_di_kem, 
+       su.so_lan_su_dung
+from service_usage su
+join max_usage mu on su.so_lan_su_dung = mu.max_su_dung;
+
+-- 14. Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. Thông tin hiển thị bao gồm IDHopDong, TenLoaiDichVu, TenDichVuDiKem, SoLanSuDung.
+select hd.id_hop_dong, 
+       ldv.ten_loai_dich_vu, 
+       dv.ten_dich_vu_di_kem, 
+       SUM(hdc.soluong) as so_lan_su_dung
+from hop_dong_chi_tiet hdc
+join dich_vu_di_kem dv on hdc.id_dich_vu_di_kem = dv.id_dich_vu_di_kem
+join loai_dich_vu ldv on dv.id_loai_dich_vu = ldv.id_loai_dich_vu
+join hop_dong hd on hdc.id_hop_dong = hd.id_hop_dong
+group by hd.id_hop_dong, ldv.ten_loai_dich_vu, dv.ten_dich_vu_di_kem
+having SUM(hdc.soluong) = 1;
+
+-- 15. Hiển thi thông tin của tất cả nhân viên bao gồm IDNhanVien, HoTen, TrinhDo, TenBoPhan, SoDienThoai, DiaChi mới chỉ lập được tối đa 3 hợp đồng từ năm 2018 đến 2019.
+select nv.id_nhan_vien, 
+       nv.ten_nhan_vien, 
+       nv.trinh_do, 
+       bp.ten_bo_phan, 
+       nv.so_dien_thoai, 
+       nv.dia_chi, 
+       COUNT(hd.id_hop_dong) as so_hop_dong
+from nhan_vien nv
+left join bo_phan bp on nv.id_bo_phan = bp.id_bo_phan
+left join hop_dong hd on nv.id_nhan_vien = hd.id_nhan_vien
+where hd.ngay_lam_hop_dong between '2018-01-01' and '2019-12-31'
+group by nv.id_nhan_vien, nv.ten_nhan_vien, nv.trinh_do, bp.ten_bo_phan, nv.so_dien_thoai, nv.dia_chi
+having COUNT(hd.id_hop_dong) <= 3;
