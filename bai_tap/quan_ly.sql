@@ -377,14 +377,12 @@ join max_usage mu on su.so_lan_su_dung = mu.max_su_dung;
 
 -- 14. Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. Thông tin hiển thị bao gồm IDHopDong, TenLoaiDichVu, TenDichVuDiKem, SoLanSuDung.
 select hd.id_hop_dong, 
-       ldv.ten_loai_dich_vu, 
        dv.ten_dich_vu_di_kem, 
        SUM(hdc.soluong) as so_lan_su_dung
 from hop_dong_chi_tiet hdc
 join dich_vu_di_kem dv on hdc.id_dich_vu_di_kem = dv.id_dich_vu_di_kem
-join loai_dich_vu ldv on dv.id_loai_dich_vu = ldv.id_loai_dich_vu
 join hop_dong hd on hdc.id_hop_dong = hd.id_hop_dong
-group by hd.id_hop_dong, ldv.ten_loai_dich_vu, dv.ten_dich_vu_di_kem
+group by hd.id_hop_dong, dv.ten_dich_vu_di_kem
 having SUM(hdc.soluong) = 1;
 
 -- 15. Hiển thi thông tin của tất cả nhân viên bao gồm IDNhanVien, HoTen, TrinhDo, TenBoPhan, SoDienThoai, DiaChi mới chỉ lập được tối đa 3 hợp đồng từ năm 2018 đến 2019.
