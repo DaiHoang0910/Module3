@@ -308,7 +308,7 @@ where lk.ten_loaikhach = 'Diamond' and (k.dia_chi = 'Vinh' or k.dia_chi = 'Quang
 -- 12.Hiển thị thông tin IDHopDong, TenNhanVien, TenKhachHang, SoDienThoaiKhachHang, TenDichVu, SoLuongDichVuDikem (được tính dựa trên tổng Hợp đồng chi tiết), 
 -- TienDatCoc của tất cả các dịch vụ đã từng được khách hàng đặt vào 3 tháng cuối năm 2019 nhưng chưa từng được khách hàng đặt vào 6 tháng đầu năm 2019.
 -- Lấy danh sách các dịch vụ đã đặt trong 3 tháng cuối năm 2019
-create temporary table Dicu_vu_cuoi_nam as
+create temporary table Dich_vu_cuoi_nam as
     select 
         hd.id_hop_dong,
         nv.ho_ten as ten_nhan_vien,
@@ -367,7 +367,7 @@ with service_usage as (
 ),
 max_usage as (
     select MAX(so_lan_su_dung) as max_su_dung
-    from ServiceUsage
+    from service_usage
 )
 select su.id_dich_vu_di_kem, 
        su.ten_dich_vu_di_kem, 
@@ -389,15 +389,15 @@ having SUM(hdc.soluong) = 1;
 
 -- 15. Hiển thi thông tin của tất cả nhân viên bao gồm IDNhanVien, HoTen, TrinhDo, TenBoPhan, SoDienThoai, DiaChi mới chỉ lập được tối đa 3 hợp đồng từ năm 2018 đến 2019.
 select nv.id_nhan_vien, 
-       nv.ten_nhan_vien, 
-       nv.trinh_do, 
+       nv.ho_ten, 
+       nv.id_trinh_do, 
        bp.ten_bo_phan, 
-       nv.so_dien_thoai, 
+       nv.sdt, 
        nv.dia_chi, 
        COUNT(hd.id_hop_dong) as so_hop_dong
 from nhan_vien nv
 left join bo_phan bp on nv.id_bo_phan = bp.id_bo_phan
 left join hop_dong hd on nv.id_nhan_vien = hd.id_nhan_vien
 where hd.ngay_lam_hop_dong between '2018-01-01' and '2019-12-31'
-group by nv.id_nhan_vien, nv.ten_nhan_vien, nv.trinh_do, bp.ten_bo_phan, nv.so_dien_thoai, nv.dia_chi
+group by nv.id_nhan_vien, nv.ho_ten, nv.id_trinh_do, bp.ten_bo_phan, nv.sdt, nv.dia_chi
 having COUNT(hd.id_hop_dong) <= 3;
