@@ -1,0 +1,82 @@
+body, h1, h2, p, a, div, header, footer, main, aside {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #222;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+.header .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.header .nav a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.header .login {
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    margin: 20px;
+}
+
+.sidebar {
+    flex: 1;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.sidebar a {
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #007BFF;
+}
+
+.content {
+    flex: 3;
+    padding: 20px;
+}
+
+.ads {
+    flex: 1;
+    background-color: #f4f4f4;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ads .ad {
+    background-color: #ddd;
+    text-align: center;
+    padding: 20px;
+}
+
+.footer {
+    background-color: #444;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+#home{
+
+}
