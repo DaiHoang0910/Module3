@@ -82,3 +82,15 @@ footer {
     color: white;
     margin-top: 20px;
 }
+.menu{
+    position: sticky;
+    background-color: black;
+    line-height: 30px;
+}
+.menu a{
+    text-decoration: none;
+    color: white;
+}
+.menu a:hover{
+    background-color: red;
+}
