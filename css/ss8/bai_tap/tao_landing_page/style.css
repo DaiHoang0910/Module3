@@ -2,11 +2,6 @@ body {
     background-color: #f8f9fa;
 }
 
-.navbar-dark .navbar-brand {
-    font-weight: bold;
-    font-size: 1.25rem;
-}
-
 .dropdown-menu {
     background-color: black;
     color: white;
@@ -14,6 +9,8 @@ body {
     padding: 10px;
     border-radius: 8px;
     width: 700px;
+    max-width: 100%;
+    overflow: auto;
 }
 
 .dropdown-menu .dropdown-item {
@@ -41,7 +38,7 @@ footer {
     color: white;
 }
 .lead-1{
-    text-align: center;
+    color: white;
     font-weight: bold;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 1.25rem;
@@ -50,8 +47,13 @@ footer {
     color: blue;
 }
 .navbar {
-    background-color: #1c1c1c; /* Màu nền navbar */
+    background-color: #1c1c1c;
 }
+.navbar-dark .navbar-brand {
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
 
 .navbar-brand img {
     height: 30px; /* Chiều cao logo */
@@ -59,6 +61,9 @@ footer {
 
 .navbar-nav .nav-link {
     color: white !important; /* Màu chữ */
+}
+.navbar-nav .nav-item {
+    margin-bottom: 5px;
 }
 
 .nav-link:hover {
@@ -84,4 +89,29 @@ footer {
 .toggle-switch input[type="checkbox"] {
     width: 20px;
     height: 20px;
+}
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 1.8rem;
+    }
+    .hero-section p {
+        font-size: 1rem;
+    }
+    .hero-section .btn {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+}
+@media (max-width: 576px) {
+    .shop-deals-btn {
+        display: none;
+    }
+    .navbar .nav-link {
+        font-size: 0.85rem;
+    }
+    .dropdown-menu .col-md-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 15px;
+    }
 }

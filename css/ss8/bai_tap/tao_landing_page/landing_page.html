@@ -10,12 +10,10 @@
 <body class="bg-black">
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <!-- Logo Microsoft -->
         <a class="navbar-brand" href="#">
             <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft Logo">
         </a>
 
-        <!-- Navigation Links -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item"><a class="nav-link" href="#">Surface</a></li>
@@ -26,14 +24,14 @@
                     </button>
                     <div class="dropdown-menu p-4">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-12 col-sm-6 col-md-3">
                                 <h6 class="fw-bold">2-in-1 PCs</h6>
                                 <ul class="list-unstyled">
                                     <li><a href="#">NEW Surface Pro, Copilot+ PC</a></li>
                                     <li><a href="#">Explore 2-in-1 PCs</a></li>
                                 </ul>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-12 col-sm-6 col-md-3">
                                 <h6 class="fw-bold">Laptops</h6>
                                 <ul class="list-unstyled">
                                     <li><a href="#">NEW Surface Laptop, Copilot+ PC</a></li>
@@ -42,13 +40,13 @@
                                     <li><a href="#">Explore all Laptops</a></li>
                                 </ul>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-12 col-sm-6 col-md-3">
                                 <h6 class="fw-bold">All-in-One</h6>
                                 <ul class="list-unstyled">
                                     <li><a href="#">Surface Studio 2+</a></li>
                                 </ul>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-12 col-sm-6 col-md-3">
                                 <h6 class="fw-bold">Need help deciding?</h6>
                                 <ul class="list-unstyled">
                                     <li><a href="#">Compare Surface devices</a></li>
@@ -64,11 +62,10 @@
                 <li class="nav-item"><a class="nav-link" href="#">Accessories</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Shop now</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Support</a></li>
-                <button class="btn shop-deals-btn">SHOP DEALS</button>
+                <button class="btn shop-deals-btn d-none d-lg-block">SHOP DEALS</button>
             </ul>
         </div>
 
-        <!-- Right Section -->
         <div class="d-flex align-items-center">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
@@ -85,7 +82,7 @@
                 <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-cart"></i> Cart</a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-person"></i> Sign in</a></li>
             </ul>
-            
+
         </div>
     </div>
 </nav>
@@ -102,8 +99,80 @@
 </section>
 <div class="container-fluid">
     <img src="laptop.jpg" style="width: 100%">
-    <p class="lead-1">Incredible speed and battery life come together with <span class="highlight">game-changing AI experiences</span>
+    <p class="lead-1" style="text-align: center">Incredible speed and battery life come together with <span
+            class="highlight">game-changing AI experiences</span>
         and signature Surface design.</p>
+</div>
+
+<div class="container">
+    <p class="lead-1">Save on Surface deals</p>
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="laptop1.avif" class="img-fluid rounded-start" alt="laptop1">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5>Save $339 on Surface Pro, Copilot+ PC and Pro Keyboard Bundle</h5>
+                                <p>Get a great deal when you pair the unique AI experiences of Surface Pro 11 with a sleek Pro Keyboard.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="laptop2.avif" class="img-fluid rounded-start" alt="laptop2">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5>Save up to $456 on Surface Pro, Copilot+ PC</h5>
+                                <p>Score savings on a fast, flexible 2-in-1 built for advanced AI experiences.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="laptop3.avif" class="img-fluid rounded-start" alt="laptop3">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5>Save up to $450 on Surface Laptop, Copilot+ PC</h5>
+                                <p>Save big on an AI-powered companion made for next-gen performance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
 </div>
 
 <footer class="bg-dark text-center text-white py-3">
