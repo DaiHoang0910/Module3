@@ -1,0 +1,24 @@
+plugins {
+    id 'war'
+}
+
+group = 'com.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Các phụ thuộc cần thiết
+    implementation 'javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1'
+    implementation 'org.glassfish:jstl:1.2.1'
+    providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+}
+
+war {
+    // Thay đổi baseName thành archivesBaseName
+    archivesBaseName = 'calculator'
+    version = '1.0-SNAPSHOT'
+}
+

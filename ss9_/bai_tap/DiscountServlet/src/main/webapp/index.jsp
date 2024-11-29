@@ -24,7 +24,7 @@
             <textarea cols="30" rows="10" name="description" placeholder="description"></textarea>
         </label>
         <input type="text" size="30" name="price" placeholder="price"/>
-        <input type="text" size="30" name="discount" placeholder="discount"/>
+        <input type="text" size="30" name="discount" placeholder="discount(%)"/>
         <input type="submit" name="calculator" value="Calculator Discount"/>
     </form>
 </div>
