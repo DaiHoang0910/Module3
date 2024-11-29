@@ -1,24 +1,32 @@
 plugins {
-    id 'war'
+  id 'java'
+  id 'war'
 }
 
-group = 'com.example'
-version = '1.0-SNAPSHOT'
+group 'com.example'
+version '1.0-SNAPSHOT'
 
 repositories {
-    mavenCentral()
+  mavenCentral()
+}
+
+ext {
+  junitVersion = '5.10.2'
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+tasks.withType(JavaCompile) {
+  options.encoding = 'UTF-8'
 }
 
 dependencies {
-    // Các phụ thuộc cần thiết
-    implementation 'javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1'
-    implementation 'org.glassfish:jstl:1.2.1'
-    providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+  compileOnly('javax.servlet:javax.servlet-api:4.0.1')
+
+  testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
 
-war {
-    // Thay đổi baseName thành archivesBaseName
-    archivesBaseName = 'calculator'
-    version = '1.0-SNAPSHOT'
-}
-
+test {
+useJUnitPlatform()}
