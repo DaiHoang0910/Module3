@@ -9,7 +9,7 @@
   <!-- Link Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Link Custom CSS -->
-  <link href="css/style.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -17,15 +17,15 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="index.jsp">Quản Lý & Bán Camera</a>
+      <a class="navbar-brand" href="../view/index.jsp">Quản Lý & Bán Camera</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"><a class="nav-link" href="index.jsp">Trang Chủ</a></li>
-          <li class="nav-item"><a class="nav-link" href="product.jsp">Sản Phẩm</a></li>
+          <li class="nav-item"><a class="nav-link" href="../view/index.jsp">Trang Chủ</a></li>
+          <li class="nav-item"><a class="nav-link" href="../product/product.jsp">Sản Phẩm</a></li>
           <li class="nav-item active"><a class="nav-link" href="cart.jsp">Giỏ Hàng</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.jsp">Liên Hệ</a></li>
         </ul>
@@ -58,7 +58,7 @@
     if (cart.isEmpty()) {
   %>
   <div class="alert alert-info" role="alert">
-    Giỏ hàng của bạn hiện tại trống. Hãy quay lại <a href="product.jsp" class="alert-link">mua sắm</a>.
+    Giỏ hàng của bạn hiện tại trống. Hãy quay lại <a href="../product/product.jsp" class="alert-link">mua sắm</a>.
   </div>
   <%
   } else {
