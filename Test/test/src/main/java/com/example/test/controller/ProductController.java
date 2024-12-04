@@ -17,15 +17,28 @@ import java.util.List;
 @WebServlet(name = "productController", urlPatterns = "/products")
 public class ProductController extends HttpServlet {
     private static final IProductService productService = new ProductService();
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-    }
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
+        String action = req.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "view":
+                showProductPage(req, resp);
+                break;
+            default:
+                showProductPage(req, resp);
+                break;
+        }
+    }
+
+    private void showProductPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Product> products = productService.getAll();
         req.setAttribute("products", products);
-        req.getRequestDispatcher("/product.jsp").forward(req, resp);
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("product.jsp");
+        dispatcher.forward(req, resp);
     }
 }
-

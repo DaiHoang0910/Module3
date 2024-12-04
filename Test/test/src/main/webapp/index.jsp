@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -29,14 +30,11 @@
                     <li class="nav-item"><a class="nav-link" href="cart.jsp">Giỏ Hàng</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.jsp">Liên Hệ</a></li>
                 </ul>
-                <div class="dropdown">
-                    <a class="btn btn-outline-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        Tài khoản
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="login.jsp">Đăng nhập</a></li>
-                        <li><a class="dropdown-item" href="register.jsp">Đăng ký</a></li>
-                    </ul>
+                <div class="d-flex">
+                    <!-- Tài khoản -->
+                    <a class="btn btn-outline-light" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Đăng Nhập</a>
+                    <a class="btn btn-outline-light ms-2" href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Đăng Ký</a>
+                    <a class="btn btn-outline-light ms-2" href="#" data-bs-toggle="modal" data-bs-target="#accountModal">Tài Khoản</a>
                 </div>
             </div>
         </div>
@@ -70,9 +68,12 @@
                 <div class="card">
                     <img src="<%= product[3] %>" class="card-img-top" alt="<%= product[0] %>">
                     <div class="card-body text-center">
-                        <h5 class="card-title"><%= product[0] %></h5>
-                        <p class="card-text"><%= product[2] %></p>
-                        <p class="text-primary fw-bold"><%= product[1] %></p>
+                        <h5 class="card-title"><%= product[0] %>
+                        </h5>
+                        <p class="card-text"><%= product[2] %>
+                        </p>
+                        <p class="text-primary fw-bold"><%= product[1] %>
+                        </p>
                         <a href="cart.jsp?product=<%= product[0] %>" class="btn btn-primary">Thêm vào giỏ</a>
                     </div>
                 </div>
@@ -81,7 +82,76 @@
         </div>
     </div>
 </section>
+<!-- Modal Đăng Nhập -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Đăng Nhập</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="login" method="post">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Mật khẩu</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- Modal Đăng Ký -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerModalLabel">Đăng Ký</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="register" method="post">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Họ và tên</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email1" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Mật khẩu</label>
+                        <input type="password" class="form-control" id="password1" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Đăng Ký</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Quản Lý Tài Khoản -->
+<div class="modal fade" id="accountModal" tabindex="-1" aria-labelledby="accountModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="accountModalLabel">Quản Lý Tài Khoản</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5>Chào, <%= session.getAttribute("user.name") %>!</h5>
+                <a href="account.jsp" class="btn btn-info">Thông Tin Tài Khoản</a>
+                <a href="logout" class="btn btn-danger mt-2">Đăng Xuất</a>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Footer -->
 <footer>
     <div class="container text-center py-3">

@@ -1,10 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ page import="com.example.test.model.Product" %>
 <%@ page import="java.util.List" %>
-<%
-    // Lấy danh sách sản phẩm từ request attribute
-    List<Product> products = (List<Product>) request.getAttribute("products");
-%>
+<%@ page import="com.example.test.model.Product" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -69,6 +65,7 @@
             <h1 class="text-center mb-4">Danh Sách Sản Phẩm</h1>
             <div class="row">
                 <%
+                    List<Product> products = (List<Product>) request.getAttribute("products");
                     if (products != null && !products.isEmpty()) {
                         for (Product product : products) {
                 %>
